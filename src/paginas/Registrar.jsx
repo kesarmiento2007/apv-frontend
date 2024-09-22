@@ -1,0 +1,148 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import Alerta from "../components/Alerta.jsx";
+import clientesAxios from "../config/axios.jsx";  // Antes se importaria axios, pero si creastes una variable de un cliente de axios entonces puedes importar esa variable y hacer las consultas con el
+
+const Registrar = () => {
+    const [ nombre, setNombre ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ password, setPassword ] = useState("");
+    const [ repetirPassword, setRepetirPassword ] = useState("");
+
+    const [ alerta, setAlerta ] = useState({});  // Creamos un State en el guardaremos los mensajes de las alertas para luego mostrar el componente con los mensajes
+
+    const handleSubmit = async e => {
+      e.preventDefault();
+
+      if([nombre, email, password, repetirPassword].some(e => e.trim() === "")) {
+        setAlerta({msg: "Hay campos vacios", error: true});
+        return;
+      }
+
+      if(password !== repetirPassword) {
+        setAlerta({msg: "Los passwords no son iguales", error: true});
+        return;
+      }
+
+      if(password.length < 6) {
+        setAlerta({msg: "El Pasword es muy corto, agrega minimo 6 caracteres", error: true});
+        return;
+      }
+
+      setAlerta({});
+
+      // Crear el usuario en la api
+      try {
+        const url = `/veterinarios`;
+        await clientesAxios.post(url, { nombre, email, password }); // npm i axios nos sirve para ejecutar una api de nuestro backend. con axios.post() estamos indicando que vamos a enviar datos por el metodo post, si no tuviera ningun metodo, por default se enviarian por get. En el primer parametro pasamos la url de la api al que ejecutar, y en el segundo parametro pasamos el objeto que se enviara como json a la api para que sea procesado. Las consultas con axios retornan un objeto con el valor que hayamos enviado desde la api con res.json(). Es obligatorio hacer las consultas con axios dentro de un try catch 
+        setAlerta({
+          msg: "Creado Correctamente, revisa tu email",
+          error: false
+        });
+      } catch (error) {
+        setAlerta({
+          msg: error.response.data.msg,  // El metodo response del error de catch() mostrara los errores de res.status() de la api al que le estamos enviando datos, de esta manera podremos mostrar mensajes de validacion provenientes del backend
+          error: true
+        });
+      }
+    }
+
+    const { msg } = alerta;
+
+    return (
+      <>
+        <div>
+          <h1 className="text-indigo-600 font-black text-6xl">Crea tu Cuenta y Administra tus <span className="text-black">Pacientes</span></h1>
+        </div>
+
+        <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
+
+          { msg && // Si la variable msg es verdadera, se muestra el componente. De esta manera podemos mostrar componentes dependiendo de la validacion de variables (que preferiblemente pueden ser states que manejen valores de true o false)
+          <Alerta 
+            alerta={alerta}
+          />}
+
+          <form
+            onSubmit={handleSubmit}
+          >
+            <div className="my-5">
+              <label
+                className="uppercase text-gray-600 block text-xl font-bold"
+              >
+                Nombre
+              </label>
+              <input 
+                type="text" 
+                placeholder="Tu Nombre"
+                className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+                value={nombre}
+                onChange={ e => setNombre(e.target.value) }  // Podemos usar states para validar los inputs
+              />
+            </div>
+
+            <div className="my-5">
+              <label
+                className="uppercase text-gray-600 block text-xl font-bold"
+              >
+                Email
+              </label>
+              <input 
+                type="email" 
+                placeholder="Email de Registro"
+                className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+                value={email}
+                onChange={ e => setEmail(e.target.value) }
+              />
+            </div>
+
+            <div className="my-5">
+              <label
+                className="uppercase text-gray-600 block text-xl font-bold"
+              >
+                Password
+              </label>
+              <input 
+                type="password" 
+                placeholder="Tu Password"
+                className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+                value={password}
+                onChange={ e => setPassword(e.target.value) }
+              />
+            </div>
+
+            <div className="my-5">
+              <label
+                className="uppercase text-gray-600 block text-xl font-bold"
+              >
+                Repetir Password
+              </label>
+              <input 
+                type="password" 
+                placeholder="Repite tu Password"
+                className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
+                value={repetirPassword}
+                onChange={ e => setRepetirPassword(e.target.value) }
+              />
+            </div>
+
+            <input 
+              type="submit" 
+              value="Crear Cuenta"
+              className="bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-indigo-800 md:w-auto"
+            />
+          </form>
+
+          <nav className="mt-10 lg:flex lg:justify-between">
+            <Link 
+              className="block text-center my-5 text-gray-500"
+              to="/">Ya tienes una cuenta? Inicia Sesion</Link>
+            <Link 
+              className="block text-center my-5 text-gray-500"
+              to="/olvide-password">Olvide mi Password</Link>
+          </nav>
+        </div>
+      </>
+    )
+}
+  
+  export default Registrar;
