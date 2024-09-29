@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Alerta from "../components/Alerta.jsx";
-import clientesAxios from "../config/axios.jsx";  // Antes se importaria axios, pero si creastes una variable de un cliente de axios entonces puedes importar esa variable y hacer las consultas con el
+import clientesAxios from "../config/axios.jsx";
 
 const Registrar = () => {
     const [ nombre, setNombre ] = useState("");
@@ -9,7 +9,7 @@ const Registrar = () => {
     const [ password, setPassword ] = useState("");
     const [ repetirPassword, setRepetirPassword ] = useState("");
 
-    const [ alerta, setAlerta ] = useState({});  // Creamos un State en el guardaremos los mensajes de las alertas para luego mostrar el componente con los mensajes
+    const [ alerta, setAlerta ] = useState({});
 
     const handleSubmit = async e => {
       e.preventDefault();
@@ -34,14 +34,14 @@ const Registrar = () => {
       // Crear el usuario en la api
       try {
         const url = `/veterinarios`;
-        await clientesAxios.post(url, { nombre, email, password }); // npm i axios nos sirve para ejecutar una api de nuestro backend. con axios.post() estamos indicando que vamos a enviar datos por el metodo post, si no tuviera ningun metodo, por default se enviarian por get. En el primer parametro pasamos la url de la api al que ejecutar, y en el segundo parametro pasamos el objeto que se enviara como json a la api para que sea procesado. Las consultas con axios retornan un objeto con el valor que hayamos enviado desde la api con res.json(). Es obligatorio hacer las consultas con axios dentro de un try catch 
+        await clientesAxios.post(url, { nombre, email, password }); 
         setAlerta({
           msg: "Creado Correctamente, revisa tu email",
           error: false
         });
       } catch (error) {
         setAlerta({
-          msg: error.response.data.msg,  // El metodo response del error de catch() mostrara los errores de res.status() de la api al que le estamos enviando datos, de esta manera podremos mostrar mensajes de validacion provenientes del backend
+          msg: error.response.data.msg,
           error: true
         });
       }
@@ -57,7 +57,7 @@ const Registrar = () => {
 
         <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
 
-          { msg && // Si la variable msg es verdadera, se muestra el componente. De esta manera podemos mostrar componentes dependiendo de la validacion de variables (que preferiblemente pueden ser states que manejen valores de true o false)
+          { msg && 
           <Alerta 
             alerta={alerta}
           />}
@@ -76,7 +76,7 @@ const Registrar = () => {
                 placeholder="Tu Nombre"
                 className="border w-full p-3 mt-3 bg-gray-50 rounded-xl"
                 value={nombre}
-                onChange={ e => setNombre(e.target.value) }  // Podemos usar states para validar los inputs
+                onChange={ e => setNombre(e.target.value) }
               />
             </div>
 

@@ -12,7 +12,7 @@ const Login = () => {
 
   const { setAuth } = useAuth();
 
-  const navigate = useNavigate();  // useNavigate() sirve para redireccionar el usuario a una URL
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -28,9 +28,9 @@ const Login = () => {
 
     try {
       const { data } = await clientesAxios.post("/veterinarios/login", { email, password });
-      localStorage.setItem("token", data.token);  // Usamos localStorage para almacenar el jwt del id del usuario y poder mantener el inicio de sesion
+      localStorage.setItem("token", data.token);
       setAuth(data);
-      navigate("/admin");  // Redireccionamos a /admin
+      navigate("/admin");
     } catch (error) {
       setAlerta({
         msg: error.response.data.msg,

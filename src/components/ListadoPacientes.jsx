@@ -8,7 +8,7 @@ const ListadoPacientes = () => {
   return (
     <>
       { pacientes.length ? 
-      (  // Si queremos retornar en la interfaz varios elementos por una condicion, los colocamos entre parentesis ()
+      (
         <>
           <h2 className="font-black text-3xl text-center">Listado de Pacientes</h2>
 
@@ -17,7 +17,7 @@ const ListadoPacientes = () => {
             <span className="text-indigo-600 font-bold">Pacientes y Citas</span>
           </p>
 
-          {pacientes.map( paciente => (  // Entre llaves {}, con el metodo de arreglo map() podemos iterar en la interfaz un arreglo de objetos, retornando el componente entre parentesis () para cada iteracion
+          {pacientes.map( paciente => (
             <Pacientes
               paciente={paciente}
             />

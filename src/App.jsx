@@ -11,13 +11,10 @@ import AdministrarPacientes from "./paginas/AdministrarPacientes.jsx";
 import EditarPerfil from "./paginas/EditarPerfil.jsx";
 import CambiarPassword from "./paginas/CambiarPassword.jsx";
 
-import { AuthProvider } from "./context/AuthProvider.jsx";  // Todas las rutas que esten dentro del AuthProvider podran a acceder a los states globales que les pasamos en el value
+import { AuthProvider } from "./context/AuthProvider.jsx";
 import { PacientesProvider } from "./context/PacientesProvider.jsx";
 
 function App() {
-
-  //console.log(import.meta.env.VITE_BACKEND_URL);  // De esta manera podemos acceder a nuestras variables de entorno en el backend. Los nombres de las variables de entorno por el lado del frontend deben empezar con VITE_
-  //Los contexts los agregamos encerrando el componente <Routes></Routes>. Podemos agregar varios contexts colocandolos uno dentro del otro segun su importancia
   
   return (
     <BrowserRouter>

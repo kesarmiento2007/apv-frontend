@@ -1,4 +1,4 @@
-import { Outlet, Navigate } from "react-router-dom";  // Outlet representa el componente de la ruta hijo en el que estemos
+import { Outlet, Navigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 const AuthLayout = () => {

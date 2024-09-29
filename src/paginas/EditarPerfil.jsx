@@ -26,7 +26,7 @@ const EditarPerfil = () => {
             return;
         }
 
-        const resultado = await actualizarPerfil(perfil);  // Si queremos almacenar en una variable lo que retorne una funcion asincrona, debemos almacenarlo con await
+        const resultado = await actualizarPerfil(perfil);
 
         setAlerta(resultado);
     }
@@ -60,10 +60,10 @@ const EditarPerfil = () => {
                                 type="text"
                                 className="border bg-gray-50 w-full p-2 mt-5 rounded-lg"
                                 name="nombre"
-                                value={perfil.nombre || ""}  // Le pasamos como valor la propiedad del objeto que le corresponde o un string vacio ya que inicialmente el state empezara con un objeto vacio
-                                onChange={ e => setPerfil({  // Esta es una manera de setear los inputs de un formulario usando un state que almacena un objeto. Para esta tecnica le debemos agregar a cada input un name, y cada name debe llamarse igual al nombre de cada propiedad del objeto
-                                    ...perfil,  // Le pasamos primero el objeto que tiene almacenado para que no se le elimine
-                                    [e.target.name] : e.target.value  // Modificamos el valor de una propiedad por su name
+                                value={perfil.nombre || ""}
+                                onChange={ e => setPerfil({
+                                    ...perfil,
+                                    [e.target.name] : e.target.value
                                 })}
                             />
                         </div>

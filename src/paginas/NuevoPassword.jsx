@@ -62,7 +62,6 @@ const NuevoPassword = () => {
 
   const { msg } = alerta
 
-  // El fragmen <></> lo debemos usar si queremos retornar varios elementos sin ellos estar dentro de en un mismo elemento
   return (
     <>
       <div>

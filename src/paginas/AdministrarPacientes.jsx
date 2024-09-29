@@ -11,7 +11,7 @@ const AdministrarPacientes = () => {
       <button
         type="button"
         className="bg-indigo-600 text-white font-bold uppercase mx-10 p-3 rounded-md mb-10 md:hidden"
-        onClick={() => setMostrarFormulario(!mostrarFormulario)}  // Al negar el state estamos haciendo que tenga lo contrario de lo que tiene, y esta tecnica nos puede ser muy util para activar o desactivar acciones cuando se presione un boton
+        onClick={() => setMostrarFormulario(!mostrarFormulario)}
       >{mostrarFormulario ? "Ocultar Formulario" : "Mostrar Formulario"}</button>
 
       <div className={`${mostrarFormulario ? "block" : "hidden"} md:block md:w-1/2 lg:w-2/5`}>

@@ -8,18 +8,19 @@ const ConfirmarCuenta = () => {
     const [ cargando, setCargando ] = useState(true);
     const [ alerta, setAlerta ] = useState({});
 
-    const params = useParams();  // Retorna un objeto con los parametros que puedan haber en la URL en el que estemos
+    const params = useParams();
     const { id } = params;
 
-    useEffect(() => {  // Puede ser muy util para ejecutar acciones una sola vez cuando el componente cargue
+    useEffect(() => {
       const confirmarCuenta = async () => {
         try {
           
           const url = `/veterinarios/confirmar/${id}`;
-          const { data } = await clientesAxios(url);  // Si vamos a hacer una consulta a una api con metodo get, entonces solo le pasamos por parametros la URL de la api. Podremos acceder a la informacion enviada con res.json() por medio de la propiedad data, asi que, podemos usar destructuring
+          const { data } = await clientesAxios(url);
           setCuentaConfirmada(true);
           setAlerta({
             msg: data.msg,
+            error: false
           });
 
         } catch (error) {
