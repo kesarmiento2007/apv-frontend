@@ -79,7 +79,7 @@ const CambiarPassword = () => {
                 </div>
 
                 <div className="my-3">
-                  <label className="uppercase font-bold text-gray-600">Password Actual</label>
+                  <label className="uppercase font-bold text-gray-600">Password Nuevo</label>
                   <input 
                     type="password"
                     className="border bg-gray-50 w-full p-2 mt-5 rounded-lg"
