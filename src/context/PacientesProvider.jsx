@@ -58,7 +58,7 @@ const PacientesProvider = ({children}) => {
             try {
                 const { data } = await clienteAxios.post("/pacientes", paciente, config);
     
-                const { createdAt, updatedAt, __v, ...pacienteAlmacenado } = data;  // Al colocar ...pacienteAlmacenado (puede llamarse como queramos) se crea un objeto sin incluir las propiedades que colocamos anteriormente. Este es un truco para excluir propiedades cuando obtengamos un objeto
+                const { createdAt, updatedAt, __v, ...pacienteAlmacenado } = data;
             
                 setPacientes([pacienteAlmacenado, ...pacientes]);
             } catch (error) {
